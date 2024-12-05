@@ -1,0 +1,102 @@
+# Telling docker-compose to build the client and server images and run them in containers.
+
+services:
+  server:
+    image: changrtanay/docks:server
+    # Giving the container a name.
+    container_name: server_c
+    ports:
+      - "8080:8080"
+    networks:
+      - mern_network
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  # Telling docker-compose to build the frontend image using the Dockerfile in the frontend directory.
+  client:
+    image: changrtanay/docks:client
+    # Giving the container a name.
+    container_name: client_c
+    # Mapping the port 3000 on the host machine to the port 3000 on the container.
+    ports:
+      - "3000:3000"  
+    networks:
+      - mern_network
+    # Mapping the client directory on the host machine to the /app directory on the container.
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    # Allows you to run container in detached mode.
+    stdin_open: true
+    tty: true
+
+  mongodb:
+    image: mongo:latest  
+    ports:
+      - "27017:27017"  
+    networks:
+      - mern_network
+    volumes:
+      - mongo-data:/data/db  
+
+networks:
+  mern_network:
+    driver: bridge 
+
+volumes:
+  mongo-data:
+    driver: local  # Persist MongoDB data locally
+
+
+# cd backend 
+# docker build -t changrtanay/docks:server .
+# cd ../frontend
+# docker build -t changrtanay/docks:client .
+# cd ..
+
+# docker-compose up -d
+# docker-compose ps
+# docker-compose down
+
+# docker login
+# docker push changrtanay/docks:server
+# docker push changrtanay/docks:client
+
+
+
+# docker pull rakeshpotnuru/productivity-app-demo:client
+
+# docker tag docks-client changrtanay/docks:client
+# docker tag docks-server changrtanay/docks:server
+
+
+
+# docker network create docks-network
+# docker run --name mongodb_c -d -p 27017:27017 --network docks-network -v ~/opt/data:/data/db mongo:latest
+# docker network connect docks-network mongodb_c (not required)
+
+# docker run --name server_c -p 8080:8080 --network docks-network -d changrtanay/docks:server 
+# nodemon -L index.js # Hot Reloading
+# docker run --name server_c -p 8080:8080 --network docks-network -v D:\Files\html\docks\server:/app -v /app/node_modules changrtanay/docks:server
+
+# docker run --name client_c -p 3000:3000 -d changrtanay/docks:client
+# docker run --name client_c -p 3000:3000 -v D:\Files\html\docks\client:/app -v /app/node_modules changrtanay/docks:client # to reflect changes
+
+# docker stop CONTAINER_NAME # stops the running container
+# docker start CONTAINER_NAME # starts the container (Make sure a container is created first)
+
+
+
+# docker-compose up -d
+# docker-compose up --build
+# docker-compose up -d -build
+# docker-compose ps
+# docker-compose logs -f client
+# docker-compose logs -f server
+# docker-compose exec server_c bash
+# docker-compose exec client_c bash
+# docker-compose exec mongodb bash
+# docker-compose down
