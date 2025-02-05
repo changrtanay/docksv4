@@ -2,7 +2,7 @@
 
 services:
   server:
-    image: changrtanay/docks:server
+    image: changrtanay/docksv4:server
     # Giving the container a name.
     container_name: server_c
     ports:
@@ -17,7 +17,7 @@ services:
 
   # Telling docker-compose to build the frontend image using the Dockerfile in the frontend directory.
   client:
-    image: changrtanay/docks:client
+    image: changrtanay/docksv4:client
     # Giving the container a name.
     container_name: client_c
     # Mapping the port 3000 on the host machine to the port 3000 on the container.
@@ -51,10 +51,10 @@ volumes:
     driver: local  # Persist MongoDB data locally
 
 
-# cd backend 
-# docker build -t changrtanay/docks:server .
-# cd ../frontend
-# docker build -t changrtanay/docks:client .
+# cd server 
+# docker build -t changrtanay/docksv4:server .
+# cd ../client
+# docker build -t changrtanay/docksv4:client .
 # cd ..
 
 # docker-compose up -d
@@ -62,28 +62,28 @@ volumes:
 # docker-compose down
 
 # docker login
-# docker push changrtanay/docks:server
-# docker push changrtanay/docks:client
+# docker push changrtanay/docksv4:server
+# docker push changrtanay/docksv4:client
 
 
 
 # docker pull rakeshpotnuru/productivity-app-demo:client
 
-# docker tag docks-client changrtanay/docks:client
-# docker tag docks-server changrtanay/docks:server
+# docker tag docksv4-client changrtanay/docksv4:client
+# docker tag docksv4-server changrtanay/docksv4:server
 
 
 
-# docker network create docks-network
-# docker run --name mongodb_c -d -p 27017:27017 --network docks-network -v ~/opt/data:/data/db mongo:latest
-# docker network connect docks-network mongodb_c (not required)
+# docker network create docksv4-network
+# docker run --name mongodb_c -d -p 27017:27017 --network docksv4-network -v ~/opt/data:/data/db mongo:latest
+# docker network connect docksv4-network mongodb_c (not required)
 
-# docker run --name server_c -p 8080:8080 --network docks-network -d changrtanay/docks:server 
+# docker run --name server_c -p 8080:8080 --network docksv4-network -d changrtanay/docksv4:server 
 # nodemon -L index.js # Hot Reloading
-# docker run --name server_c -p 8080:8080 --network docks-network -v D:\Files\html\docks\server:/app -v /app/node_modules changrtanay/docks:server
+# docker run --name server_c -p 8080:8080 --network docksv4-network -v D:\Files\html\docksv4\server:/app -v /app/node_modules changrtanay/docksv4:server
 
-# docker run --name client_c -p 3000:3000 -d changrtanay/docks:client
-# docker run --name client_c -p 3000:3000 -v D:\Files\html\docks\client:/app -v /app/node_modules changrtanay/docks:client # to reflect changes
+# docker run --name client_c -p 3000:3000 -d changrtanay/docksv4:client
+# docker run --name client_c -p 3000:3000 -v D:\Files\html\docksv4\client:/app -v /app/node_modules changrtanay/docksv4:client # to reflect changes
 
 # docker stop CONTAINER_NAME # stops the running container
 # docker start CONTAINER_NAME # starts the container (Make sure a container is created first)
