@@ -22,7 +22,7 @@ Docks is a real-time document collaboration platform built using the MERN stack,
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/docks.git
+   git clone https://github.com/changrtanay/docksv4.git
    cd docks
    ```
 2. Install dependencies:
