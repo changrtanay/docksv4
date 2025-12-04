@@ -3,6 +3,11 @@
 ## Overview
 Docks is a real-time document collaboration platform built using the MERN stack, Socket.io, and QuillJS. It allows multiple users to edit documents simultaneously with real-time updates. The platform is containerized using Docker and deployed on Vercel and Render for a seamless experience.
 
+## Screenshot
+Here is a screenshot from the live demo:
+
+![Screenshot](screenshot.png)
+
 ## Features
 - **User Authentication**: Secure login system.
 - **Real-Time Editing**: Collaborate on documents with others in real-time.
